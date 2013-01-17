@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  This is the Schema which describes the fibonacci tag
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<!-- 
+  Root tag for the XML 
+-->
+<xs:element name="fibonacci" type="fibonacciType"/>
+
+<xs:complexType name="fibonacciType">
+  <xs:sequence>
+    <xs:element name="value" type="valueType" minOccurs="0" maxOccurs="unbounded"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="valueType">
+  <xs:simpleContent>
+    <xs:extension base="xs:nonNegativeInteger">
+      <xs:attribute name="index" type="xs:nonNegativeInteger"/>
+    </xs:extension>
+  </xs:simpleContent>
+</xs:complexType>
+
+</xs:schema>

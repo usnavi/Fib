@@ -1,0 +1,55 @@
+<project>
+
+    <path id="fib.classpath">
+      <fileset dir="lib">
+        <include name="*.jar"/>
+      </fileset>
+    </path>
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile" depends="clean">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes" classpathref="fib.classpath" includeantruntime="false"/>
+    </target>
+
+    <target name="jar" depends="compile">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/Fib.jar" basedir="build/classes">
+        </jar>
+    </target>
+
+    <target name="run">
+        <java fork="true" classpathref="fib.classpath" classname="gregsharek.FibServer">
+            <classpath>
+              <pathelement location="build/jar/Fib.jar"/>
+           </classpath>
+        </java>
+    </target>
+             	
+    <target name="junit">
+        <junit fork="yes" printsummary="yes">
+            <classpath>
+            <path refid="fib.classpath"/> 
+              <pathelement location="build/jar/Fib.jar"/>
+            </classpath>           
+            <test name="gregsharek.test.TestFibCalc"/>      
+            <formatter type="plain"/>             
+        </junit>
+    </target>
+
+
+    <target name="junit-rest">
+        <junit fork="yes" printsummary="yes">
+           <classpath>
+             <path refid="fib.classpath"/> 
+             <pathelement location="build/jar/Fib.jar"/>
+           </classpath>           
+           <test name="gregsharek.test.TestFibonacciREST"/>
+           <formatter type="plain"/>             
+        </junit>
+    </target>
+
+</project>
